@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ <Document>  
+<name>KmlFile</name>
+  
+ <Placemark>
+    <name>ATM</name>
+    <description>This is ATM.</description>
+    <Point>
+      <coordinates>77.485742,12.9419929</coordinates>
+    </Point>
+  </Placemark>
+  
+  <Placemark>
+    <name>Cross</name>
+    <description>This is Cross</description>
+    <Point>
+      <coordinates>77.4934554,12.9414668</coordinates>
+    </Point>
+  </Placemark>
+  
+  <Placemark>
+    <name>VVK</name>
+    <description>This VVK Motors</description>
+    <Point>
+      <coordinates>77.4950399,12.9444733</coordinates>
+    </Point>
+  </Placemark>
+</Document>
+</kml>
