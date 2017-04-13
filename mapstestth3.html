@@ -1,0 +1,46 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+       #map {
+        height: 800px;
+        width: 100%;
+       }
+    </style>
+  <script type="text/javascript" src="https://gc.kis.v2.scr.kaspersky-labs.com/9ED094F1-F9E4-F04E-A485-99422E2D6DF2/main.js" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="https://gc.kis.v2.scr.kaspersky-labs.com/2FD6D2E22499-584A-E40F-4E9F-1F490DE9/abn/main.css"/></head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 12,
+    center: {lat: 12.9418635, lng: 77.486137}
+        });
+      
+	
+	var kmlLayer = new google.maps.KmlLayer({
+    url: 'https://raw.githubusercontent.com/sanjeevhalyal/servicesrepo/master/pmarker06.kml',
+    suppressInfoWindows: true,
+    map: map
+  });
+  
+  
+  kmlLayer.addListener('click', function(kmlEvent) {
+    var text = kmlEvent.featureData.description;
+    showInContentWindow(text);
+  });
+  
+  
+  function showInContentWindow(text) {
+    alert(text);
+  }
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaFZ8Ht-pwAz50-FXSPoCaHFnqY7uAhsw&callback=initMap">
+    </script>
+  </body>
+</html>
