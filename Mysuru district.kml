@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+ <Document>  
+<name>KmlFile</name>
+  
+ <Placemark>
+    <name>Mysuru Palace</name>
+    <description>This is the palace</description>
+    <Point>
+      <coordinates>76.655180,12.305093</coordinates>
+    </Point>
+  </Placemark>
+  
+  <Placemark>
+    <name>MYsuru Zoo</name>
+    <description>This is Mysuru zoo</description>
+    <Point>
+      <coordinates>76.665307,12.302368</coordinates>
+    </Point>
+  </Placemark>
+  
+  <Placemark>
+    <name>KRS</name>
+    <description>This is KRS</description>
+    <Point>
+      <coordinates>76.572416,12.425429 </coordinates>
+    </Point>
+  </Placemark>
+</Document>
+</kml>
