@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+       #map {
+        height: 800px;
+        width: 50%;
+		float: left;
+       }
+	   #info {
+        height: 800px;
+        width: 50%;
+		float: right;
+       }
+    </style>
+  </head>
+  <body>
+    <h3>My Google Maps Demo</h3>
+	<div>
+    <div id="map"></div>
+	<div id="info">
+	<span id="title"></span>
+	<hr>
+	</br>
+	</br>
+	<span id="desc"></span>
+	</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script>
+	var arr=["Karnataka",14.5203896,75.7223521,18.4767308,78.5885424,11.5945951,73.8726712];
+	var mainmark=[];
+	var mainkml=[];
+	var mainpoly=[];
+	var map;
+	
+	  function MainCenterControl(controlDiv, map,txt) {
+
+  // Set CSS for the control border.
+  var controlUI = document.createElement('div');
+  controlUI.style.backgroundColor = '#fff';
+  controlUI.style.border = '2px solid #fff';
+  controlUI.style.borderRadius = '3px';
+  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+  controlUI.style.cursor = 'pointer';
+  controlUI.style.marginBottom = '22px';
+  controlUI.style.textAlign = 'center';
+  controlUI.title = 'Click to recenter the map';
+  controlDiv.appendChild(controlUI);
+
+  // Set CSS for the control interior.
+  var controlText = document.createElement('div');
+  controlText.style.color = 'rgb(25,25,25)';
+  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+  controlText.style.fontSize = '16px';
+  controlText.style.lineHeight = '38px';
+  controlText.style.paddingLeft = '5px';
+  controlText.style.paddingRight = '5px';
+  controlText.innerHTML = txt;
+  controlUI.appendChild(controlText);
+
+  // Setup the click event listeners: simply set the map to Chicago.
+  controlUI.addEventListener('click', function() {
+    recenter(arr);
+	mainkml.forEach(function(kml){
+	kml.setMap(null);
+	});
+	mainmark.forEach(function(mark){
+	mark.setMap(map);
+	});
+	mainpoly.forEach(function(p)
+				{
+				p.setMap(map);
+				});
+	
+  });
+
+}
+
+
+  
+	
+	
+	
+      function initMap() {
+        
+         map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 15,
+    
+	
+        });
+		recenter(arr);
+		var text="Karnataka";
+	  
+   var centerControlDiv = document.createElement('div');
+  var centerControl = new MainCenterControl(centerControlDiv, map,text);
+
+  centerControlDiv.index = 1;
+  map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(centerControlDiv);
+      
+ 
+	 var area=["Bangalore Urban","Mysuru district"];
+	 area.forEach(function(a,index){
+	 
+	 setuparea(a,index);
+	 });
+	 
+	 
+	
+  
+  
+  
+  
+  
+      }
+	  
+	  
+	  function setuparea(area,index)
+	  {
+	  var OSM_URL ='https://overpass-api.de/api/interpreter?data=%5Bout%3Ajson%5D%5Btimeout%3A25%5D%3B%28relation%5B%22name%22%3D%22'+area+'%22%5D%5B%22admin%5Flevel%22%3D%225%22%5D%3B%29%3Bout geom%3B';
+				
+  $.get(OSM_URL, function(data) {
+    if (data && data.elements.length > 0 && data.elements[0].members.length > 0) {
+      var paths = [];
+
+      data.elements[0].members.forEach(function(member) {
+        if (member.type === 'way' && member.role === 'outer') {
+          member.geometry.forEach(function(geo) {
+            paths.push({
+              lng: geo.lon,
+              lat: geo.lat
+            });
+          });
+        }
+      });
+	  var arr=["Karnataka",14.5203896,75.7223521,18.4767308,78.5885424,11.5945951,73.8726712];
+	  var arr=[area];
+	  data.elements.forEach(function(member) 
+	  {
+			if (member.type === 'relation' ){
+			
+			var lata=(member.bounds.minlat+member.bounds.maxlat)/2;
+			var longa=(member.bounds.maxlon+member.bounds.minlon)/2;
+			console.log(lata);
+			console.log(longa);
+			arr.push(lata);
+			arr.push(longa);
+			arr.push(member.bounds.maxlat);
+			arr.push(member.bounds.maxlon);
+			arr.push(member.bounds.minlat);
+			arr.push(member.bounds.minlon);
+			
+			
+
+			var infowindow = new google.maps.InfoWindow({
+    content: area
+  });
+
+  
+  kmlurl='https://raw.githubusercontent.com/sanjeevhalyal/servicesrepo/master/'+index+'.kml'
+			var kmlLayer = new google.maps.KmlLayer({
+		url: kmlurl,
+    suppressInfoWindows: true,
+    
+  });
+  
+   kmlLayer.addListener('click', function(kmlEvent) {
+    var desc = kmlEvent.featureData.description;
+    var title = kmlEvent.featureData.name;
+	
+	console.log("Updated");
+	document.getElementById("title").innerHTML =title;
+	document.getElementById("desc").innerHTML =desc;
+	
+    
+  });
+  
+  mainkml.push(kmlLayer);
+
+			var marker = new google.maps.Marker({
+			position: {"lat": lata, "lng": longa},
+			title:"Bengaluru!"
+			});
+			mainmark.push(marker);
+			marker.setMap(map);
+			marker.addListener('click', function() {
+				//recenter(arr);
+				infowindow.close();
+				mainmark.forEach(function(m)
+				{
+				m.setMap(null);
+				});
+				mainpoly.forEach(function(p)
+				{
+				p.setMap(null);
+				});
+				
+				kmlLayer.setMap(map);
+	  
+			});
+			marker.addListener('mouseover', function() {
+		infowindow.open(map, marker);
+			});
+			marker.addListener('mouseout', function() {
+		infowindow.close();
+			});
+
+			}
+			var text=area;
+	  
+   var centerControlDiv = document.createElement('div');
+  var centerControl = new CenterControl(centerControlDiv, map,text,kmlLayer);
+
+  centerControlDiv.index = 1;
+  map.controls[google.maps.ControlPosition.LEFT_TOP].push(centerControlDiv);
+	  });
+	  poly = new google.maps.Polygon({
+        paths: paths,
+        strokeColor: '#FF0000',
+        strokeOpacity: 0.8,
+        strokeWeight: 0.5,
+        fillColor: '#FF0000',
+        fillOpacity: 0.05,
+        
+      });
+	  
+      poly.setMap(map);
+	  mainpoly.push(poly);
+	}
+	
+	
+	
+  });
+	  
+	  
+	  
+	  function CenterControl(controlDiv, map,txt,kmll) {
+
+  // Set CSS for the control border.
+  var controlUI = document.createElement('div');
+  controlUI.style.backgroundColor = '#fff';
+  controlUI.style.border = '2px solid #fff';
+  controlUI.style.borderRadius = '3px';
+  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+  controlUI.style.cursor = 'pointer';
+  controlUI.style.marginBottom = '22px';
+  controlUI.style.textAlign = 'center';
+  controlUI.title = 'Click to recenter the map';
+  controlDiv.appendChild(controlUI);
+
+  // Set CSS for the control interior.
+  var controlText = document.createElement('div');
+  controlText.style.color = 'rgb(25,25,25)';
+  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+  controlText.style.fontSize = '16px';
+  controlText.style.lineHeight = '38px';
+  controlText.style.paddingLeft = '5px';
+  controlText.style.paddingRight = '5px';
+  controlText.innerHTML = txt;
+  controlUI.appendChild(controlText);
+
+  // Setup the click event listeners: simply set the map to Chicago.
+  controlUI.addEventListener('click', function() {
+    mainmark.forEach(function(m)
+				{
+				m.setMap(null);
+				});
+				mainpoly.forEach(function(p)
+				{
+				p.setMap(null);
+				});
+				
+				kmll.setMap(map);
+				
+				
+  });
+
+}
+
+
+  
+  
+	  }
+	  
+	  
+function recenter(arr)
+	{
+		var bounds = new google.maps.LatLngBounds();
+	bounds.extend(new google.maps.LatLng(parseFloat(arr[3]), parseFloat(arr[4])));
+      bounds.extend(new google.maps.LatLng(parseFloat(arr[5]), parseFloat(arr[6])));
+      
+      map.fitBounds(bounds);
+		var cen = {lat: arr[1], lng: arr[2]};
+		map.setCenter(cen);
+		console.log("recentered");
+
+	}
+	
+	function showInContentWindow(text) {
+    alert(text);
+  }
+  
+  
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBaFZ8Ht-pwAz50-FXSPoCaHFnqY7uAhsw&callback=initMap">
+    </script>
+  </body>
+</html>
