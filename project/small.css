@@ -72,9 +72,9 @@ body
 position: absolute;
 top: 52%;
 height: 40px;
-width: 30%;
+width: 70%;
 overflow: hidden;
-left:35%;
+left:15%;
 vertical-align: bottom;
 background-color:rgb(255, 204, 0);
 background-image:
@@ -94,9 +94,9 @@ background-image:
   position: absolute;
   top:60%;
 height: 40px;
-  width: 30%;
+  width: 70%;
 overflow: hidden;
-  left:35%;
+  left:15%;
 vertical-align: bottom;
 background-color:rgba(0,0,0,0);
 
