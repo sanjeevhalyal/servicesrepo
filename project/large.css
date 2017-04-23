@@ -69,9 +69,10 @@ border-bottom: solid rgba(255, 204, 0,0.3);
 #booking
 {
 position: absolute;
-bottom: 120px;
-height: 30px;
+top: 52%;
+height: 40px;
 width: 30%;
+overflow: hidden;
 left:35%;
 vertical-align: bottom;
 background-color:rgb(255, 204, 0);
@@ -85,27 +86,28 @@ background-image:
   color:grey;
   font-size: 20px;
   letter-spacing:3px;
-
 }
 
 #info
 {
   position: absolute;
-  bottom: 70px;
+  top:60%;
 height: 40px;
   width: 30%;
 overflow: hidden;
   left:35%;
 vertical-align: bottom;
 background-color:rgba(0,0,0,0);
-border-radius: 3px;
-font-family: fantasy;
-border: solid rgba(255,255,255,0.8) 3px;
+
+    border-radius: 3px;
+    font-family: fantasy;
+    border: solid rgba(255,255,255,0.8) 3px;
     color:Black;
     font-size: 20px;
     letter-spacing:3px;
 
 }
+
 
 
 a,a.hlink:link ,
