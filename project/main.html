@@ -1,0 +1,265 @@
+<meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+<body>
+
+
+<div id="postload">
+<div id="topbar">
+<div id="mainicon">
+  <svg id="iconsvg" width="66" height="64">
+    <circle cx="26" cy="26" r="20" stroke="green" stroke-width="2" fill="yellow" />
+    <polygon id="iconpoly" points="50 26,60 26,55 31"
+    style="fill:white;stroke:black;stroke-width:1;fill-rule:nozero;" />
+    <polygon id="iconpoly" points="50 26,60 26"
+    style="fill:white;stroke:white;stroke-width:2;fill-rule:nozero;" />
+  </svg>
+
+</div>
+<div class="optionlink">
+  <a class="hlink" href="#Aboutus">About Us</a>
+</div>
+<div class="optionlink">
+  <a class="hlink" id="username" href="#option2">Not a User</a>
+</div>
+<div class="optionlink">
+  <a class="hlink" id="loginout" onclick="sio()">LogIn/SignUp</a>
+</div>
+</div>
+
+
+
+<div id="imagebar">
+
+  <button id="booking">
+    Booking
+  </button>
+  <button id="info" onclick="scroll()" ><svg  width="10" height="5">
+    <polygon  points="0 0,10 0,5 5"
+    style="fill:rgba(0,0,0,0);stroke:black;stroke-width:2;fill-rule:nozero;" />
+
+  </svg><br>
+    Check out more..
+
+  </button>
+
+</div>
+
+<div id="contentbar" >
+<span  id="locations">Locations</span>
+<hr style="width:10%;border-top: 1px solid rgb(255, 102, 102);"/>
+<hr style="width:6%;border-top: 1px solid #ccc;"/>
+</div>
+<hr style="width:90%">
+<div>
+</div>
+
+</div>
+
+
+
+<div id="loadgif" width=100% height="100%" >
+        <div id="outerloader"><div id="loader"><div id="innerloader"><div id="dotloader"> </div></div></div></div>
+        <iframe id="botcss" frameBorder="0" src="wave2.html"></iframe>
+</div>
+
+</iframe>
+</body>
+
+<link rel='stylesheet' type="text/css" media='screen and (min-width: 1024px)' href='large.css' />
+<link rel='stylesheet' type="text/css" media='screen and (max-width: 1024px)' href='small.css' />
+
+<link rel='stylesheet' type="text/css" media='screen and (max-width: 1024px)' href='small.css' />
+
+
+<script>
+
+function scroll() {window.scrollTo(0,748);}
+
+
+var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function()
+  {
+    if (this.readyState == 4 && this.status == 200)
+    {
+      console.log(this.response);
+      parser = new DOMParser();
+      var areas = parser.parseFromString(this.response,"text/xml").getElementsByTagName("area");
+      for (var i = 0; i < areas.length; i++) {
+        //alert(areas[i].childNodes[3].childNodes[0].nodeValue);
+        var d=document.createElement("div");
+        d.innerHTML='<button class="infohlinkbutton" href="#text">'+
+        areas[i].childNodes[1].childNodes[0].nodeValue+
+        '</button><hr><br><br><br><br>'+areas[i].childNodes[3].childNodes[0].nodeValue;
+        d.classList.add('infodiv');
+        var cb=document.getElementById("contentbar");
+
+      //  var cb=document.getElementById("cc");
+
+
+     cb.appendChild(d);
+
+      }
+
+      console.log("updated");
+    }
+  };
+  xhttp.open("GET", "https://raw.githubusercontent.com/sanjeevhalyal/servicesrepo/master/places.xml", true);
+  xhttp.send();
+
+
+setTimeout(function() {
+
+document.getElementById('loadgif').style["display"]="none";
+document.getElementById('postload').style["display"]="block";
+ }, 3000);
+
+
+document.getElementById('botcss').onload=
+function(){
+  document.getElementById('loadgif').style["visibility"]="visible";
+};
+
+
+$(window).on('load resize',function(){
+
+  if($(window).width()<1024)
+  {
+
+      document.getElementById("mainicon").style["display"]="block";
+      document.getElementById("iconpoly").style["display"]="block";
+      olink=document.getElementsByClassName("optionlink");
+
+      for(i=0; i<olink.length; i++) {olink[i].style["display"]="none";}
+
+document.getElementById("topbar").style["height"]="64px";
+document.getElementsByTagName("body")[0].style.overflow="visible";
+document.getElementById('iconpoly').setAttribute("points","50 26,60 26,55 31");
+
+      document.getElementById('iconsvg').onclick = function()
+      {
+        document.getElementById('iconpoly').setAttribute("points","50 26,60 26,55 21");
+      var boh=document.getElementsByTagName("body")[0];
+      console.log(boh.style.overflow);
+      if(boh.style.overflow==="visible")
+      {
+
+      boh.style.overflow="hidden";
+      document.getElementById("topbar").style["height"]="100vh";
+      olink=document.getElementsByClassName("optionlink");
+      for(i=0; i<olink.length; i++) {
+
+     olink[i].style["display"]="block";
+
+   }
+ }
+ else
+ {
+   boh.style.overflow="visible";
+   document.getElementById("topbar").style["height"]="64px";
+   document.getElementById('iconpoly').setAttribute("points","50 26,60 26,55 31");
+   olink=document.getElementsByClassName("optionlink");
+   for(i=0; i<olink.length; i++) {
+
+  olink[i].style["display"]="none";
+
+}
+
+ }
+      };
+
+      var boh=document.getElementsByTagName("body")[0];
+      boh.style["overflow-x"]="hidden";
+
+  }
+  else
+  {
+
+    document.getElementById('mainicon').style["display"]="inline-block";
+    document.getElementsByTagName("body")[0]="visible";
+      document.getElementById("iconpoly").style["display"]="none";
+      olink=document.getElementsByClassName("optionlink");
+      for(i=0; i<olink.length; i++) {
+        olink[i].style["height"]="64px";
+     olink[i].style["display"]="inline-block";
+     var boh=document.getElementsByTagName("body")[0];
+     boh.style["overflow-x"]="hidden";
+   }
+
+      document.getElementById('iconsvg').onclick = function(){
+        location.href = "file:///C:/Users/sanje/Desktop/New%20folder/main.html";};
+
+  }
+});
+</script>
+<script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  // TODO: Replace with your project's customized code snippet
+  var config = {
+    apiKey: "AIzaSyC9PVOaq9ZLh9Bvt1BV5NN81taENPlj71o",
+    authDomain: "testing-hs-1491132429121.firebaseapp.com",
+    databaseURL: "https://testing-hs-1491132429121.firebaseio.com",
+    projectId: "testing-hs-1491132429121",
+    storageBucket: "testing-hs-1491132429121.appspot.com",
+    messagingSenderId: "336867846036"
+
+
+  };
+  firebase.initializeApp(config);
+
+
+    firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      // User is signed in.
+      document.getElementById('username').innerHTML=user.email;
+      document.getElementById('loginout').innerHTML="Sign Out";
+      document.getElementById('logdiv').style["display"]="none";
+
+      // ...
+    } else {
+      // User is signed out.
+      // ...
+      document.getElementById('username').innerHTML="Not a User";
+      document.getElementById('loginout').innerHTML="LogIn/SignUp";
+
+
+
+    }
+  });
+
+function sio()
+{
+console.log(firebase.auth().currentUser);
+  if (firebase.auth().currentUser!=null) {
+    //alert("singing out");
+    firebase.auth().signOut().then(function() {
+      // Sign-out successful.
+      console.log("signed out");
+    }).catch(function(error) {
+      // An error happened.
+    });
+  } else {
+  // alert("signing in to default user ");
+   window.location = "login.html";
+
+  }
+}
+
+function signinwith()
+{
+  var email=document.getElementById('emailbox').value;
+  var pass=document.getElementById('passbox').value;
+  firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log(errorMessage);
+    // ...
+  });
+
+}
+
+
+  </script>
+</html>

@@ -1,0 +1,112 @@
+<body>
+  <div class="infodiv">
+    <button class="infohlinkbutton"href="#text">bangalore</button>
+    <hr>
+    <br><br><br><br>
+
+     info more info..
+  </div>
+
+  <div class="infodiv">
+    <button class="infohlinkbutton"href="#text">bangalore</button>
+    <hr>
+    <br><br><br><br>
+
+     info more info..
+  </div>
+
+  <button onclick="signout()">sign out</button>
+</body>
+
+<style>
+
+.infodiv
+{
+min-height: 250px;
+padding: 15px;
+width: 200px;
+border: none;
+margin:10px;
+display: inline-block;
+text-align: center;
+border-radius: 10%;
+background-color:rgba(0,0, 0,0);
+background-image:
+  linear-gradient(
+    rgba(0,0,0,0.2),rgba(0,0,0,0.0)
+  );
+border-bottom: 1px solid;
+}
+
+.infohlinkbutton
+{
+  background-color:rgba(0,0, 0,0);
+  background-image:
+    linear-gradient(
+      rgba(0,0,0,0),rgba(0,0,0,0.1)
+    );
+
+  font-family: fantasy;
+  border: none;
+  color:rgb(255, 102, 102);
+  font-size: 20px;
+  border-radius: 10%;
+
+}
+
+</style>
+
+<script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+<script>
+  // Initialize Firebase
+  // TODO: Replace with your project's customized code snippet
+  var config = {
+    apiKey: " AIzaSyB0xTk-SupcvxmUQ7BOwyoHfh9pSVj4OV4 ",
+    authDomain: "fir-baselogin.firebaseapp.com",
+    databaseURL: " https://fir-baselogin.firebaseio.com",
+    storageBucket: "fir-baselogin.appspot.com",
+  };
+  firebase.initializeApp(config);
+function check()
+{
+  firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    var displayName = user.displayName;
+    var email = user.email;
+    var emailVerified = user.emailVerified;
+    var photoURL = user.photoURL;
+    var isAnonymous = user.isAnonymous;
+    var uid = user.uid;
+    var providerData = user.providerData;
+    // ...
+  } else {
+    // User is signed out.
+    // ...
+    console.log("No User signined");
+  }
+});
+}
+
+check();
+firebase.auth().signInWithEmailAndPassword("s@g.com", "sg_test").catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  // ...
+});
+
+function signout()
+{
+  firebase.auth().signOut().then(function() {
+    // Sign-out successful.
+    console.log("signed out");
+  }).catch(function(error) {
+    // An error happened.
+  });
+};
+
+check();
+
+
+</script>

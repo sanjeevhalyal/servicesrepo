@@ -1,0 +1,241 @@
+
+#locations
+{
+  font-size: 30px;
+  font-family: monospace;
+  border-bottom: 3px solid rgba(255, 204, 0,0.5);
+  margin-bottom:2px;
+  width: 140px;
+
+}
+
+.infodiv
+{
+height: 150px;
+width: 80%;
+border: none;
+margin:10px;
+display: inline-block;
+text-align: center;
+border-radius: 5px;
+background-color:rgba(0,0, 0,0);
+background-image:
+  linear-gradient(
+    rgba(0,0,0,0),rgba(255, 204, 0,0.2)
+  );
+
+border-bottom: solid rgba(255, 204, 0,0.3);
+}
+
+body
+{
+  overflow-y: hidden;
+}
+
+.infohlinkbutton
+{
+  background-color:rgba(0,0, 0,0);
+  background-image:
+    linear-gradient(
+      rgba(0,0,0,0),rgba(255, 204, 0,0.3)
+    );
+
+  font-family: fantasy;
+  border: none;
+  color:rgb(255, 102, 102);
+  font-size: 20px;
+  border-radius: 10%;
+  border-bottom: solid rgba(255, 204, 0,0.4);
+
+}
+
+#contentbar
+{
+  text-align: center;
+  display: inline-block;
+  width: 100vw;
+}
+
+/* adding content data*/
+#imagebar
+{
+  height: 80vh;
+  width: 100vw;
+  background: url("FotorCreated.jpg") no-repeat fixed center top;
+  position: relative;
+
+
+}
+
+#booking
+{
+position: absolute;
+bottom: 120px;
+height: 40px;
+width: 30%;
+overflow: hidden;
+left:35%;
+vertical-align: bottom;
+background-color:rgb(255, 204, 0);
+background-image:
+  linear-gradient(
+    rgba(255,255,255,0),rgba(0,0,0,0.1)
+  );
+  border-radius: 5px;
+  font-family: fantasy;
+  border: none;
+  color:grey;
+  font-size: 20px;
+  letter-spacing:3px;
+}
+
+#info
+{
+  position: absolute;
+  bottom: 70px;
+height: 40px;
+  width: 30%;
+overflow: hidden;
+  left:35%;
+vertical-align: bottom;
+background-color:rgba(0,0,0,0);
+
+    border-radius: 3px;
+    font-family: fantasy;
+    border: solid rgba(255,255,255,0.8) 3px;
+    color:Black;
+    font-size: 20px;
+    letter-spacing:3px;
+
+}
+
+
+#topbar
+{
+z-index: 9;
+
+}
+
+#mainicon
+{
+
+  height: 64px;
+  display: block;
+
+}
+
+a,a.hlink:link ,
+a.hlink:visited
+{
+  text-decoration: none;
+  font-family: monospace;
+  font-size: 25px;
+  color:black;
+  margin-left: 30px;
+  margin-top: 50px;
+}
+a.hlink:hover
+{
+  padding-bottom: 5px;
+  border-bottom: 2px solid grey
+}
+
+.optionlink
+{
+  margin-top: 30px;
+  height: 70px;
+
+}
+
+/*
+body and loader set no change below and topbar and icon
+*/
+#botcss
+{
+width:100%;
+height:50%;
+bottom:0px;
+left:0px;
+position:fixed;
+
+}
+#postload
+{
+  display: none;
+  width: 100vw;
+}
+
+
+#loadgif
+{
+  position:fixed;
+  top:0px;
+  width:100%;
+  height:50%;
+  background-color:rgb(255, 204, 0);
+  background-image:
+    linear-gradient(
+      rgba(255,255,255,0),rgba(255,255,255,0.5)
+    );
+    visibility: hidden;
+  line-height: 50vh;
+  text-align: center;
+  font-size: 40px;
+  font-family:fantasy;
+  color:rgba(255, 102, 102,0);
+  z-index:10;
+
+
+
+}
+
+#loader {
+  display: inline-block;
+
+    border-top: 2px solid red; /* Blue */
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    animation: spin 1s linear infinite reverse;
+    background-color: rgba(255, 102, 102,0.2);
+}
+
+#innerloader {
+  display: inline-block;
+
+    border-top: 2px solid red; /* Blue */
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    animation: spin 1s linear infinite  ;
+    background-color: rgba(255, 102, 102,0.4);
+}
+
+#outerloader {
+  display: inline-block;
+
+    border-top: 3px solid red; /* Blue */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin-top: 40vh;
+    animation: spin 2s linear infinite;
+    background-color: rgba(255, 102, 102,0.2);
+}
+
+#dotloader
+{
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  background-color: rgba(255, 0,0,0.15);
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+body
+{
+  margin: 0px;
+}

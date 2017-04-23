@@ -1,0 +1,59 @@
+<body>
+  <div id="logdiv" style="background-color:white;border-radius:10px;position:absolute;top:5vh;left:10vw;width:80vw;height:30vh;z-index:11;text-align:center;padding:30px">
+
+<span style="font-size:2vh;color:rgb(255, 204, 0)">Email: </span> <input id="emailbox" type="text" placeholder="Enter Email" style="border:none;width:50vw;height:3vh"></input>
+<br/><br/>
+<span style="font-size:2vh;color:rgb(255, 204, 0)">Password: </span><input id="passbox" type="password" placeholder="Enter Password" style="border:none;width:50vw;height:3vh"></input>
+<br/><br/>
+<button onclick="signinwith()" style="height:3vh;width:50%;font-size:2vh">Login</button>
+
+</div>
+</body>
+
+<style>
+input::-webkit-input-placeholder { font-size: 2vh; color: #555; }
+input::-moz-placeholder { font-size: 2vh; color: #555; }
+input:-ms-input-placeholder { font-size: 2vh; color: #555; }
+input:-moz-placeholder { font-size: 2vh; color: #555; }
+input{ font-size: 2vh; color: rgb(255, 102, 102); }
+</style>
+<script src="https://www.gstatic.com/firebasejs/3.8.0/firebase.js"></script>
+<script type="text/javascript">
+
+var config = {
+  apiKey: "AIzaSyC9PVOaq9ZLh9Bvt1BV5NN81taENPlj71o",
+  authDomain: "testing-hs-1491132429121.firebaseapp.com",
+  databaseURL: "https://testing-hs-1491132429121.firebaseio.com",
+  projectId: "testing-hs-1491132429121",
+  storageBucket: "testing-hs-1491132429121.appspot.com",
+  messagingSenderId: "336867846036"
+
+
+};
+firebase.initializeApp(config);
+
+
+function signinwith()
+{
+  var email=document.getElementById('emailbox').value;
+  var pass=document.getElementById('passbox').value;
+  firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log(errorMessage);
+    // ...
+  });
+
+}
+
+firebase.auth().onAuthStateChanged(function(user) {
+if (user) {
+  // User is signed in.
+  window.history.back()
+
+  // ...
+}
+});
+
+</script>
