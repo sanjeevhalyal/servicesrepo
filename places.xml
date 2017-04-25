@@ -1,21 +1,4 @@
 <places>
-
-<area>
-<name>
-  Bangalore Urban
-</name>
-<desc>
-Captial city, more info.. and more info......
-</desc>
-</area>
-<area>
-  <name>
-    Mysuru district
-  </name>
-  <desc>
-    Mysuru district , Historic and more info..
-  </desc>
-</area>
   <area>
 <name>
   Mangalore Urban
@@ -32,5 +15,36 @@ Beach  city, more info.. and more info......
     Gokarana district , Historic and more info..
   </desc>
 </area>
-
+  <area>
+<name>
+  Kudremukh
+</name>
+<desc>
+Hiking palce, more info.. and more info......
+</desc>
+</area>
+<area>
+  <name>
+    Nandi hills
+  </name>
+  <desc>
+    Nandhini hills , Temple and more info..
+  </desc>
+</area>
+<area>
+<name>
+  western ghats
+</name>
+<desc>
+Forest palce, more info.. and more info......
+</desc>
+</area>
+<area>
+  <name>
+   Bangalore rural
+  </name>
+  <desc>
+    Forest around bangalore and more info..
+  </desc>
+</area>
 </places>
